@@ -6,6 +6,7 @@ import random
 
 LETTERS = 5
 TRIES = 6
+RUNS = 1
 IDEA_OF_A_WORD = ''
 VERDICTS = []
 
@@ -92,16 +93,33 @@ def run_shit(ebalo, resp):
 
 
 if __name__ == '__main__':
-    resp = ''
+    wins = 0
+    loses = 0
+    winrate = 0.0
     ebalo = [e for e in list(import_dicks().keys()) if len(e) == LETTERS and re.match(r'[A-Z]', e)]
-    IDEA_OF_A_WORD = random.choice(ebalo)
+    for i in range(RUNS):
+        VERDICTS = []
+        resp = ''
 
-    victory, tries, the_word = run_shit(ebalo, resp)
+        IDEA_OF_A_WORD = random.choice(ebalo)
 
-    if victory:
-        print(f"You still didn't win anything, but your code guessed the word in {tries} tries. It was {the_word}")
+        victory, tries, the_word = run_shit(ebalo, resp)
+
+        if victory:
+            print(f"You still didn't win anything, but your code guessed the word in {tries} tries. It was {the_word}")
+            wins += 1
+        else:
+            print(f"You lost after {tries} tries. What a shame.")
+            loses += 1
+
+        for verdict in VERDICTS:
+            print(verdict)
+        print("=" * 8)
+
+    if loses == 0:
+        winrate = 1
     else:
-        print(f"You lost after {tries} tries. What a shame.")
+        winrate = wins / loses
 
-    for verdict in VERDICTS:
-        print(verdict)
+    print(f"You won our gorgeous shiny nothing {wins} times and you miserably lost {loses} times.\n"
+          f"Your winrate is {winrate}")
