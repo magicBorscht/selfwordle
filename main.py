@@ -50,20 +50,27 @@ def choose_shit(ebalo, resp, the_word, tried_words):
     print('')
 
     for word in set(ebalo):
+        # print(f"Let's try {word}, shall we")
+        yellow_checked = True
+        green_checked = True
+        grey_checked = True
         if word in tried_words:
-            print(f"The word {word} has already been tried with no luck")
+            # print(f"The word {word} has already been tried with no luck")
             continue
         for letter in included_letters:
             if letter not in word:
-                print(f"")
-                continue
+                # print(f"The letter {letter} must be in this word, but it isn't")
+                yellow_checked = False
         for letter in shit_letters:
             if letter in word:
-                continue
+                # print(f"The letter {letter} must be not be here")
+                grey_checked = False
         for indox, letter in correct_letters.items():
             if word[indox] != letter:
-                continue
-        return word
+                # print(f"The letter {letter} must be in {indox + 1} place, but it isn't there")
+                green_checked = False
+        if yellow_checked and green_checked and grey_checked:
+            return word
 
     return 'piss'
 
@@ -89,7 +96,7 @@ def run_shit(ebalo, resp):
         print('')
         print("=" * 20)
         print('')
-        if resp is 'G' * LETTERS:
+        if resp == 'G' * LETTERS:
             return True, i + 1, the_word
     return False, i + 1, 'fuck'
 
