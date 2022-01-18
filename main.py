@@ -6,7 +6,7 @@ import random
 
 LETTERS = 5
 TRIES = 6
-RUNS = 1
+RUNS = 10
 IDEA_OF_A_WORD = ''
 VERDICTS = []
 
@@ -122,4 +122,4 @@ if __name__ == '__main__':
         winrate = wins / loses
 
     print(f"You won our gorgeous shiny nothing {wins} times and you miserably lost {loses} times.\n"
-          f"Your winrate is {winrate}")
+          f"Your winrate is {round(winrate, 2)}.")
