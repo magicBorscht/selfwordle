@@ -3,14 +3,15 @@ import json
 import re
 import random
 
-
+# settings
 LETTERS = 5
 TRIES = 6
 RUNS = 1
-IDEA_OF_A_WORD = ''
-VERDICTS = []
 AUTOMATIC = True
 
+# can't touch this
+IDEA_OF_A_WORD = ''
+VERDICTS = []
 
 def import_dicks() -> dict:
     blya = os.listdir('dicts')
