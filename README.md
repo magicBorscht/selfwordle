@@ -7,5 +7,5 @@ Why does it exist? No one knows. And no one will.
 - Works on pure pythonium.  
 - Totally automatic.
 - Does not include NFTs.
-- Not written in Rust.
+- Is not written in Rust.
 - A dead parrot is not guaranteed but can be gifted for downloading. Randomly.

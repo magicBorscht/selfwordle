@@ -1,0 +1,4 @@
+LETTERS = 5
+TRIES = 6
+RUNS = 100
+AUTOMATIC = True

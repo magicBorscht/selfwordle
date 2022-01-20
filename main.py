@@ -2,12 +2,7 @@ import os
 import json
 import re
 import random
-
-# settings
-LETTERS = 5
-TRIES = 6
-RUNS = 100
-AUTOMATIC = True
+from settings import LETTERS, TRIES, RUNS, AUTOMATIC
 
 
 class Wordler:
@@ -109,6 +104,7 @@ class Wordler:
             else:
                 self.choose_shit_manually()
                 if self.the_word == 'emergency':
+                    self.victory = False
                     return
 
             self.tried_words.append(self.the_word)
@@ -179,7 +175,3 @@ class Wordler:
                   "Be warned, you'll be properly disrespected for that.")
 
         self.run_this_shit()
-
-
-if __name__ == '__main__':
-    Wordler()
