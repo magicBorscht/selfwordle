@@ -126,6 +126,7 @@ class Wordler:
             self.correct_letters = {}
             self.shit_letters = set()
             self.included_letters = set()
+            self.tried_words = []
             self.verdict = ''
 
             self.idea_of_a_word = random.choice(self.ebalo)
