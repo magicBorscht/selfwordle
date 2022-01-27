@@ -1,4 +1,5 @@
 LETTERS = 5
 TRIES = 6
-RUNS = 100
+RUNS = 5
 AUTOMATIC = True
+REVERSE = True

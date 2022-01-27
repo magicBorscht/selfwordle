@@ -2,7 +2,7 @@ import os
 import json
 import re
 import random
-from settings import LETTERS, TRIES, RUNS, AUTOMATIC
+from settings import LETTERS, TRIES, RUNS, AUTOMATIC, REVERSE
 
 
 class Wordler:
@@ -128,16 +128,33 @@ class Wordler:
             self.included_letters = set()
             self.tried_words = []
             self.verdict = ''
-
-            self.idea_of_a_word = random.choice(self.ebalo)
+            if REVERSE:
+                restring = f'[A-Z]{"{"}{LETTERS}{"}"}'
+                while True:
+                    self.idea_of_a_word = input(f"Input the word you want to be guessed. "
+                                                f"Uppercase, {LETTERS} symbols, no dirty tricks: ")
+                    if self.idea_of_a_word == 'fug':
+                        print("Stop wasting my time.")
+                        return
+                    if not re.match(restring, self.idea_of_a_word):
+                        print('I said NO DIRTY TRICKS!')
+                        continue
+                    if self.idea_of_a_word not in self.ebalo:
+                        print("There's no such word.")
+                        continue
+                    break
+            else:
+                self.idea_of_a_word = random.choice(self.ebalo)
 
             self.play()
 
+            if AUTOMATIC:
+                player = 'this code'
+            else:
+                player = 'you'
+
             if self.victory:
-                if AUTOMATIC:
-                    player = 'this code'
-                else:
-                    player = 'you'
+
                 print(
                     f"You still didn't win anything, but {player} guessed the word in {self.tries} tries. "
                     f"It was {self.the_word}")
@@ -171,7 +188,7 @@ class Wordler:
 
     def __init__(self):
         self.import_dicks()
-        if not AUTOMATIC:
+        if not AUTOMATIC or REVERSE:
             print("If you wanna chicken out, just type 'fug' in the prompt. "
                   "Be warned, you'll be properly disrespected for that.")
 
