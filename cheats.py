@@ -56,7 +56,7 @@ class Cheats:
                 fucking_words.append(word)
         print(fucking_words)
 
-    def __init__(self, letters: int, right='', shit='', included=''):
+    def __init__(self, letters: int, right, shit, included):
         self.included = included
         self.shit = shit
         self.letters = letters

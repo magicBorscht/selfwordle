@@ -10,7 +10,7 @@ class Wordler:
     verdicts = []
     correct_letters = {}
     shit_letters = set()
-    included_letters = set()
+    included_letters = {}
     tried_words = []
     ebalo = {}
     verdict = ''
@@ -39,7 +39,9 @@ class Wordler:
                 self.correct_letters.update({i: letter})
             elif letter in self.idea_of_a_word:
                 verdict += 'Y'
-                self.included_letters.update(letter)
+                shitfuck = self.included_letters.get(letter, [])
+                shitfuck.append(i)
+                self.included_letters.update({letter: shitfuck})
             else:
                 verdict += 'F'
                 self.shit_letters.update(letter)
@@ -48,12 +50,13 @@ class Wordler:
         if verdict != "G" * LETTERS:
             print("the hint:")
             print("".join([self.correct_letters.get(i, '_') for i in range(LETTERS)]))
-            print(f"Also might be in this word: {', '.join(self.included_letters)}")
+            print(f"Also might be in this word: {', '.join(self.included_letters.keys())}")
             print(f"Avoid letters {', '.join(self.shit_letters)}\n{'=' * 20}\n")
         self.verdict = verdict
         self.verdicts.append(verdict)
 
     def choose_shit(self):
+        print(f"Shitty letters: {self.included_letters}")
         for word in set(self.ebalo):
             # print(f"Let's try {word}, shall we")
             yellow_checked = True
@@ -66,6 +69,9 @@ class Wordler:
                 if letter not in word:
                     # print(f"The letter {letter} must be in this word, but it isn't")
                     yellow_checked = False
+                else:
+                    if word.find(letter) in self.included_letters[letter]:
+                        yellow_checked = False
             for letter in self.shit_letters:
                 if letter in word:
                     # print(f"The letter {letter} must be not be here")
@@ -125,7 +131,7 @@ class Wordler:
             self.tries = 0
             self.correct_letters = {}
             self.shit_letters = set()
-            self.included_letters = set()
+            self.included_letters = {}
             self.tried_words = []
             self.verdict = ''
             if REVERSE:
